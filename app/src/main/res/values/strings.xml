@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Denúncia Ambiental</string>
+    <string name="app_description">Denuncie crimes ambientais para ajudar a proteger nosso planeta</string>
+
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="register_prompt">Não tem uma conta? Cadastre-se</string>
+    <string name="anonymous_report">Denunciar anonimamente</string>
+    <string name="register_title">Criar Conta</string>
+    <string name="full_name">Nome Completo</string>
+    <string name="cpf">CPF</string>
+    <string name="phone">Telefone</string>
+    <string name="confirm_password">Confirmar Senha</string>
+    <string name="register">Cadastrar</string>
+    <string name="policy_agreement">Ao se cadastrar, você concorda com nossos Termos de Serviço e Política de Privacidade</string>
+    <string name="back">Voltar</string>
+
+    <string name="no_reports">Nenhuma denúncia encontrada</string>
+    <string name="new_report">Nova Denúncia</string>
+    <string name="logout">Sair</string>
+
+    <string name="report_title">Título da Denúncia</string>
+    <string name="crime_type">Tipo de Crime</string>
+    <string name="report_description">Descrição</string>
+    <string name="location">Localização</string>
+    <string name="tap_to_set_location">Toque para definir localização</string>
+    <string name="evidence_photos">Fotos de Evidência</string>
+    <string name="add_photo">Adicionar Foto</string>
+    <string name="report_anonymously">Denunciar anonimamente</string>
+    <string name="submit_report">Enviar Denúncia</string>
+    <string name="evidence_photo">Foto de Evidência</string>
+
+    <string name="report_details">Detalhes da Denúncia</string>
+    <string name="description">Descrição</string>
+    <string name="reported_by">Denunciado Por</string>
+    <string name="anonymous_reporter">Denunciante Anônimo</string>
+    <string name="update_status">Atualizar Status</string>
+    <string name="status_pending">Pendente</string>
+    <string name="status_investigating">Investigando</string>
+    <string name="status_resolved">Resolvido</string>
+    <string name="status_rejected">Rejeitado</string>
+    <string name="admin_notes">Notas do Administrador</string>
+
+    <string name="admin_dashboard">Painel do Administrador</string>
+    <string name="pending">Pendentes</string>
+    <string name="resolved">Resolvidos</string>
+    <string name="no_data">Nenhum dado disponível</string>
+    <string name="navigation_drawer_open">Abrir menu de navegação</string>
+    <string name="navigation_drawer_close">Fechar menu de navegação</string>
+    <string name="admin_name">Usuário Administrador</string>
+    <string name="admin_email">admin@exemplo.com</string>
+    <string name="dashboard">Painel</string>
+    <string name="all_reports">Todas as Denúncias</string>
+    <string name="user_management">Gerenciamento de Usuários</string>
+    <string name="statistics">Estatísticas</string>
+    <string name="other">Outros</string>
+    <string name="settings">Configurações</string>
+
+    <string name="search_users">Buscar usuários</string>
+    <string name="no_users_found">Nenhum usuário encontrado</string>
+    <string name="app_logo">Logo do Aplicativo</string>
+
+    <string name="select_location">Selecionar Localização</string>
+    <string name="view_location">Visualizar Localização</string>
+    <string name="confirm_location">Confirmar Localização</string>
+    <string name="please_select_location">Por favor, selecione uma localização</string>
+    <string name="location_permission_denied">Permissão de localização negada</string>
+    <string name="current_location">Localização Atual</string>
+    <string name="selected_location">Localização Selecionada</string>
+    <string name="report_location">Local da Denúncia</string>
+    <string name="location_selected">Localização selecionada</string>
+
+    <string name="dashboard_summary">Resumo das Denúncias</string>
+    <string name="total_reports">Total de Denúncias</string>
+    <string name="pending_reports">Pendentes</string>
+    <string name="investigating_reports">Em Investigação</string>
+    <string name="resolved_reports">Resolvidas</string>
+    <string name="reports_by_status">Denúncias por Status</string>
+    <string name="reports_by_type">Denúncias por Tipo</string>
+    <string name="reports_over_time">Denúncias ao Longo do Tempo</string>
+    <string name="number_of_reports">Número de Denúncias</string>
+    <string name="view_all_reports">Ver Todas as Denúncias</string>
+    <string name="monthly_report_summary">Resumo Mensal de Denúncias</string>
+    <string name="month">Mês</string>
+    <string name="reports_count">Quantidade</string>
+</resources>
