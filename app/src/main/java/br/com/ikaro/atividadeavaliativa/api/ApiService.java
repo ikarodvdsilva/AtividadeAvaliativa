@@ -17,7 +17,7 @@ public interface ApiService {
     @POST("users/")
     Call<User> register(@Body UserCreate user);
 
-    @GET("users/me")
+    @GET("users/me/")
     Call<User> getCurrentUser();
 
     @GET("reports")
@@ -39,7 +39,7 @@ public interface ApiService {
     @POST("reports/{id}/images")
     Call<ReportImage> uploadImage(
         @Path("id") int reportId,
-        @Part("file") okhttp3.MultipartBody.Part file
+        @Part MultipartBody.Part file
     );
 
     @DELETE("reports/{reportId}/images/{imageId}")

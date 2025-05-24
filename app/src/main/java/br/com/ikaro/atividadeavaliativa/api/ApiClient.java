@@ -39,7 +39,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiClient {
     private static final String TAG = "ApiClient";
-    private static final String BASE_URL = "http://10.0.2.2:8000/";
+    private static final String BASE_URL = "https://api-unemat-aula-production.up.railway.app/";
     private static final String PREF_NAME = "ApiPrefs";
     private static final String KEY_TOKEN = "token";
     private static ApiClient instance;
@@ -51,9 +51,10 @@ public class ApiClient {
     private ApiClient(Context context) {
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         sessionManager = new SessionManager(context);
-        token = preferences.getString(KEY_TOKEN, null);
+        token = sessionManager.getAuthToken();
 
         Log.d(TAG, "Inicializando ApiClient com URL base: " + BASE_URL);
+        Log.d(TAG, "Token atual: " + token);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> Log.d(TAG, "OkHttp: " + message));
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -67,7 +68,7 @@ public class ApiClient {
                     okhttp3.Request.Builder builder = original.newBuilder();
                     if (token != null) {
                         builder.header("Authorization", "Bearer " + token);
-                        Log.d(TAG, "Adicionando token de autorização");
+                        Log.d(TAG, "Adicionando token de autorização: Bearer " + token);
                     }
                     
                     okhttp3.Request request = builder.build();
@@ -129,7 +130,13 @@ public class ApiClient {
                     LoginResponse loginResponse = response.body();
                     token = loginResponse.getAccessToken();
                     saveToken(token);
-                    getCurrentUser(callback);
+                    sessionManager.saveAuthToken(token);
+                    Log.d(TAG, "Token salvo: " + token);
+                    
+                    // Aguardar um momento para garantir que o token foi salvo
+                    new android.os.Handler().postDelayed(() -> {
+                        getCurrentUser(callback);
+                    }, 500);
                 } else {
                     String errorBody = "";
                     try {
@@ -194,6 +201,8 @@ public class ApiClient {
 
     public void getCurrentUser(ApiCallback<User> callback) {
         Log.d(TAG, "Obtendo dados do usuário atual");
+        Log.d(TAG, "Token usado: " + token);
+        
         apiService.getCurrentUser().enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
