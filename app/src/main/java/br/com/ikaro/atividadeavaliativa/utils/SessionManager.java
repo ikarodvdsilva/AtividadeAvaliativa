@@ -2,57 +2,83 @@ package br.com.ikaro.atividadeavaliativa.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import br.com.ikaro.atividadeavaliativa.models.User;
+import com.google.gson.Gson;
 
 public class SessionManager {
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-    private Context context;
-
-    private static final String PREF_NAME = "EnviroCrimeApp";
-
-    private static final String IS_LOGGED_IN = "IsLoggedIn";
+    private static final String PREF_NAME = "EnviroCrimePrefs";
+    private static final String KEY_TOKEN = "token";
+    private static final String KEY_USER = "user";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_IS_ADMIN = "isAdmin";
+    private static final String KEY_IS_ADMIN = "is_admin";
+
+    private final SharedPreferences preferences;
+    private final Gson gson;
 
     public SessionManager(Context context) {
-        this.context = context;
-        pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        editor = pref.edit();
+        preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        gson = new Gson();
+    }
+
+    public void saveAuthToken(String token) {
+        preferences.edit().putString(KEY_TOKEN, token).apply();
+    }
+
+    public String getAuthToken() {
+        return preferences.getString(KEY_TOKEN, null);
+    }
+
+    public void saveUserDetails(User user) {
+        String userJson = gson.toJson(user);
+        preferences.edit()
+            .putString(KEY_USER, userJson)
+            .putInt(KEY_ID, user.getId())
+            .putString(KEY_NAME, user.getName())
+            .putString(KEY_EMAIL, user.getEmail())
+            .putBoolean(KEY_IS_ADMIN, user.isAdmin())
+            .apply();
+    }
+
+    public User getUserDetails() {
+        String userJson = preferences.getString(KEY_USER, null);
+        if (userJson != null) {
+            return gson.fromJson(userJson, User.class);
+        }
+        return null;
     }
 
     public void createLoginSession(int id, String name, String email, boolean isAdmin) {
-        editor.putBoolean(IS_LOGGED_IN, true);
-        editor.putInt(KEY_ID, id);
-        editor.putString(KEY_NAME, name);
-        editor.putString(KEY_EMAIL, email);
-        editor.putBoolean(KEY_IS_ADMIN, isAdmin);
-        editor.commit();
-    }
-
-    public boolean isLoggedIn() {
-        return pref.getBoolean(IS_LOGGED_IN, false);
+        preferences.edit()
+            .putInt(KEY_ID, id)
+            .putString(KEY_NAME, name)
+            .putString(KEY_EMAIL, email)
+            .putBoolean(KEY_IS_ADMIN, isAdmin)
+            .apply();
     }
 
     public int getUserId() {
-        return pref.getInt(KEY_ID, 0);
+        return preferences.getInt(KEY_ID, 0);
     }
 
     public String getUserName() {
-        return pref.getString(KEY_NAME, "");
+        return preferences.getString(KEY_NAME, "");
     }
 
     public String getUserEmail() {
-        return pref.getString(KEY_EMAIL, "");
+        return preferences.getString(KEY_EMAIL, "");
     }
 
     public boolean isAdmin() {
-        return pref.getBoolean(KEY_IS_ADMIN, false);
+        return preferences.getBoolean(KEY_IS_ADMIN, false);
     }
 
     public void logoutUser() {
-        editor.clear();
-        editor.commit();
+        clearSession();
+    }
+
+    public void clearSession() {
+        preferences.edit().clear().apply();
     }
 }
